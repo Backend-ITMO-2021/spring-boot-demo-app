@@ -14,7 +14,7 @@ public class MainEndpoint {
 
     @GetMapping
     public String test() {
-        return "OK";
+        return "OK1";
     }
 
 }

@@ -1,10 +1,8 @@
 package com.sb.ifmodemo.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -12,9 +10,19 @@ import java.util.Optional;
 @RequestMapping("/")
 public class MainEndpoint {
 
+    @Autowired
+    private IfmoUserRepository ifmoUserRepository;
+
     @GetMapping
     public String test() {
-        return "OK1";
+        StringBuilder sb = new StringBuilder();
+        ifmoUserRepository.findAll().forEach(p -> sb.append(p.getName()+", "));
+        return sb.toString();
+    }
+
+    @PostMapping
+    public IfmoUser createUser(@RequestBody IfmoUser user){
+        return ifmoUserRepository.save(user);
     }
 
 }

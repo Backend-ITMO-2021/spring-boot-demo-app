@@ -38,7 +38,7 @@ public class StatusController {
             }
 
             var gameId = loggedInUser.get().getGame();
-            if(gameId != 0) {
+            if(gameId != 0L) {
                 var game = gameRepository.findById(gameId);
                 var jGame = new JSONObject();
                 jGame.put("field", game.get().getField());
